@@ -1,0 +1,25 @@
+import {
+  useDevice,
+  type ValidConfigType,
+  type ValidModuleConfigType,
+} from "@core/stores";
+
+type UseWaitForConfigProps =
+  | { configCase: ValidConfigType; moduleConfigCase?: never }
+  | { configCase?: never; moduleConfigCase: ValidModuleConfigType };
+
+export function useWaitForConfig({
+  configCase,
+  moduleConfigCase,
+}: UseWaitForConfigProps): void {
+  const { config, moduleConfig, id } = useDevice();
+
+  const isDataDefined = configCase
+    ? config[configCase] !== undefined
+    : moduleConfig[moduleConfigCase as ValidModuleConfigType] !== undefined;
+
+  if (!isDataDefined) {
+    console.log(`[useWaitForConfig] Device ${id} waiting for ${configCase || moduleConfigCase}. Config keys: ${Object.keys(config || {})}`);
+    throw new Promise<void>(() => {});
+  }
+}

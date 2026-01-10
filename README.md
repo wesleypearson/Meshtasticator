@@ -1,6 +1,34 @@
 # Meshtasticator
 Discrete-event and interactive simulator for [Meshtastic](https://meshtastic.org/). 
 
+## Remodel: Web Interface Bridge ("Digital Twin")
+This project has been remodeled to support a React-based Web Interface driven by the Python Simulator via WebSockets.
+
+### Quick Start
+1.  **Install Dependencies:**
+    ```bash
+    pip3 install -r requirements.txt
+    cd web && npm install
+    ```
+
+2.  **Run the Simulator (Backend):**
+    ```bash
+    # Runs the Python backend with WebSocket Server on port 8765
+    python3 interactiveSim.py 3
+    ```
+
+3.  **Run the Web Interface (Frontend):**
+    ```bash
+    cd web
+    npm run dev
+    ```
+    Open http://localhost:5173
+
+### Features
+*   **Real-time Bridge:** Node positions and packets are broadcast from Python to the Web UI.
+*   **Mock Mode:** On systems without Docker (or if it crashes), the simulator enters "Mock Mode" to keep the UI connection alive.
+*   **Interactive:** Use the Python CLI to send messages (`broadcast 0 "hello"`) and see packets in the terminal (UI visualization pending full implementation).
+
 ## Discrete-event simulator
 The discrete-event simulator mimics the radio section of the device software in order to understand its working. It can also be used to assess the performance of your scenario, or the scalability of the protocol. 
 
