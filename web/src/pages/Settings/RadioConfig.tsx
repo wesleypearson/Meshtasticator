@@ -8,7 +8,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@components/UI/Tabs.tsx";
-import { useDevice, type ValidConfigType } from "@core/stores";
+import { useDevice, useDeviceStore, type ValidConfigType } from "@core/stores";
 import { type ComponentType, Suspense, useMemo } from "react";
 import type { UseFormReturn } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -76,6 +76,10 @@ export const RadioConfig = ({ onFormInit }: ConfigProps) => {
           </Suspense>
         </TabsContent>
       ))}
+      <button onClick={() => {
+        console.log("DEBUG: RadioConfig Store ID:", (window as any).__DEVICE_STORE_ID__);
+        console.log("DEBUG: RadioConfig Device:", useDeviceStore.getState().getDevice(0));
+      }}>Debug Store</button>
     </Tabs>
   );
 };

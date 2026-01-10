@@ -1,19 +1,19 @@
 import { useDeviceContext } from "@core/hooks/useDeviceContext.ts";
-import { type Device, useDeviceStore } from "@core/stores/deviceStore/index.ts";
+import { type Device, useDeviceStore } from "./deviceStore";
+import { type NodeDB, useNodeDBStore } from "./nodeDBStore";
 import {
   type MessageStore,
   useMessageStore,
-} from "@core/stores/messageStore/index.ts";
-import { type NodeDB, useNodeDBStore } from "@core/stores/nodeDBStore/index.ts";
-import { bindStoreToDevice } from "@core/stores/utils/bindStoreToDevice.ts";
+} from "./messageStore";
+import { bindStoreToDevice } from "./utils/bindStoreToDevice";
 
 export {
   CurrentDeviceContext,
   type DeviceContext,
   useDeviceContext,
 } from "@core/hooks/useDeviceContext";
-export { useAppStore } from "@core/stores/appStore/index.ts";
-export { type Device, useDeviceStore } from "@core/stores/deviceStore/index.ts";
+export { useAppStore } from "./appStore";
+export { type Device, useDeviceStore } from "./deviceStore";
 export {
   useActiveConnection,
   useActiveConnectionId,
@@ -29,21 +29,25 @@ export {
   useRemoveSavedConnection,
   useSavedConnections,
   useUpdateSavedConnection,
-} from "@core/stores/deviceStore/selectors.ts";
+} from "./deviceStore/selectors";
 export type {
+  Connection,
+  ConnectionStatus,
+  ConnectionType,
+  NewConnection,
   Page,
   ValidConfigType,
   ValidModuleConfigType,
   WaypointWithMetadata,
-} from "@core/stores/deviceStore/types.ts";
+} from "./deviceStore/types";
 export {
   MessageState,
   type MessageStore,
   MessageType,
   useMessageStore,
-} from "@core/stores/messageStore";
-export { type NodeDB, useNodeDBStore } from "@core/stores/nodeDBStore/index.ts";
-export type { NodeErrorType } from "@core/stores/nodeDBStore/types.ts";
+} from "./messageStore";
+export { type NodeDB, useNodeDBStore } from "./nodeDBStore";
+export type { NodeErrorType } from "./nodeDBStore/types";
 export {
   SidebarProvider,
   useSidebar, // TODO: Bring hook into this file
@@ -61,7 +65,7 @@ export const useNodeDB = bindStoreToDevice(
 export const useDevice = (): Device => {
   const { deviceId } = useDeviceContext();
 
-  const device = useDeviceStore((s) => s.getDevice(deviceId));
+  const device = useDeviceStore((s) => s.devices.get(deviceId));
   const addDevice = useDeviceStore((s) => s.addDevice);
   
   // This side-effect during render is still not ideal but cleaner than inside selector.

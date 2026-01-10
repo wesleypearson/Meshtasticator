@@ -20,6 +20,6 @@ export function useWaitForConfig({
 
   if (!isDataDefined) {
     console.log(`[useWaitForConfig] Device ${id} waiting for ${configCase || moduleConfigCase}. Config keys: ${Object.keys(config || {})}`);
-    throw new Promise<void>(() => {});
+    // throw new Promise<void>(() => {});
   }
 }

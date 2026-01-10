@@ -94,6 +94,8 @@ export const SimulationTool = () => {
       console.log("DEBUG: Configs set successfully");
 
       // Verify directly from store
+      
+      console.log(`[SimulationTool] Store ID: ${(window as any).__DEVICE_STORE_ID__}`);
       setTimeout(() => {
           const storeDevice = useDeviceStore.getState().getDevice(0);
           console.log(`[SimulationTool] Direct Store ACCESS Device 0 config: ${Object.keys(storeDevice?.config || {})}`);

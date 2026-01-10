@@ -1,4 +1,4 @@
-import type { ConnectionStatus } from "@app/core/stores/deviceStore/types.ts";
+import type { ConnectionStatus } from "@core/stores";
 import { cn } from "@core/utils/cn.ts";
 import type { Protobuf } from "@meshtastic/core";
 import { useNavigate } from "@tanstack/react-router";

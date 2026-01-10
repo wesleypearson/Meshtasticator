@@ -3,7 +3,7 @@ import { Switch } from "@app/components/UI/Switch.tsx";
 import type {
   ConnectionType,
   NewConnection,
-} from "@app/core/stores/deviceStore/types.ts";
+} from "@core/stores";
 import { testHttpReachable } from "@app/pages/Connections/utils";
 import { Button } from "@components/UI/Button.tsx";
 import { Input } from "@components/UI/Input.tsx";

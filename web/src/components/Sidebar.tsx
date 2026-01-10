@@ -1,4 +1,3 @@
-import { useFirstSavedConnection } from "@app/core/stores/deviceStore/selectors.ts";
 import { SidebarButton } from "@components/UI/Sidebar/SidebarButton.tsx";
 import { SidebarSection } from "@components/UI/Sidebar/SidebarSection.tsx";
 import { Spinner } from "@components/UI/Spinner.tsx";
@@ -9,6 +8,7 @@ import {
   useAppStore,
   useDefaultConnection,
   useDevice,
+  useFirstSavedConnection,
   useNodeDB,
   useSidebar,
 } from "@core/stores";

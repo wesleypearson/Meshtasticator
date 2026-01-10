@@ -1026,9 +1026,11 @@ export const deviceStoreInitializer: StateCreator<PrivateDeviceState> = (
   addDevice: (id) => {
     const existing = get().devices.get(id);
     if (existing) {
+      // console.log(`[DeviceStore] addDevice(${id}): Device already exists.`);
       return existing;
     }
 
+    console.warn(`[DeviceStore] addDevice(${id}): Creating NEW device (overwriting if race condition).`);
     const device = deviceFactory(id, get, set);
     set(
       produce<PrivateDeviceState>((draft) => {
@@ -1171,6 +1173,10 @@ const persistOptions: PersistOptions<PrivateDeviceState, DevicePersisted> = {
   },
 };
 
+const STORE_ID = Math.random().toString(36).substring(7);
+console.log(`[DeviceStore] INITIALIZING STORE INSTANCE: ${STORE_ID}`);
+(window as any).__DEVICE_STORE_ID__ = STORE_ID;
+
 export const useDeviceStore = createStore(
-  subscribeWithSelector(persist(deviceStoreInitializer, persistOptions)),
+  subscribeWithSelector(deviceStoreInitializer),
 );
